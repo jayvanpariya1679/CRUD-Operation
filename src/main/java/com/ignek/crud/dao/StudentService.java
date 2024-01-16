@@ -105,6 +105,7 @@ public abstract class StudentService {
 			PreparedStatement preparedStatement = connection.prepareStatement(StudentConstance.SELECT_QUERY);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
+				
 				Student student = new Student();
 				setStudentData(student, resultSet);
 				list.add(student);

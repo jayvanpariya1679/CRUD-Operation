@@ -23,18 +23,18 @@ public class EditServlet extends HttpServlet {
 		response.setContentType("text/html");
 		String editId = request.getParameter(StudentConstance.EDIT_ID);
 		String deleteId = request.getParameter(StudentConstance.DELETE_ID);
-	
-		if(editId != null) {
+
+		if (editId != null) {
 			Student student = StudentService.getStudentById(Integer.parseInt(editId));
-			request.setAttribute(StudentConstance.STUDENT,student);
+			request.setAttribute(StudentConstance.STUDENT, student);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
-		}	
-		
-		if(deleteId!=null){
+		}
+
+		if (deleteId != null) {
 			StudentService.delete(Integer.parseInt(deleteId));
 			response.sendRedirect("ViewServlet");
 		}
-		
+
 	}
 
 }

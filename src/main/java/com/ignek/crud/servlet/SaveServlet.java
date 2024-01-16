@@ -33,7 +33,8 @@ public class SaveServlet extends HttpServlet {
 		String gender = request.getParameter(StudentConstance.GENDER);
 		String course = request.getParameter(StudentConstance.COURSE);
 
-		Student student = new Student(sid,firstName,lastName,email,phoneNumber,gender,course);
+		Student student = Student.create().withParametes(sid, firstName, lastName, email, phoneNumber, gender, course);
+		
 		
 
 		if (sid != StudentConstance.DEFAULT_INTEGER) {

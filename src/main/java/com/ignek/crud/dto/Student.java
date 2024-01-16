@@ -9,10 +9,13 @@ public class Student {
 	private long phoneNumber;
 	private String gender;
 	private String course;
-
-	public Student(int id, String firstName, String lastName, String email, long phoneNumber, String gender,
+	
+	public static Student create() {
+		return new Student();
+	}
+	
+	public Student withParametes(int id, String firstName, String lastName, String email, long phoneNumber, String gender,
 			String course) {
-		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -20,10 +23,12 @@ public class Student {
 		this.phoneNumber = phoneNumber;
 		this.gender = gender;
 		this.course = course;
+		
+		return this;
 	}
-	
+
 	public Student() {
-		super();
+		
 	}
 
 	public int getId() {
