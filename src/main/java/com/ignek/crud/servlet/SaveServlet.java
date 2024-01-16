@@ -3,7 +3,7 @@ package com.ignek.crud.servlet;
 import java.io.IOException;
 import javax.swing.JOptionPane;
 import com.ignek.crud.constance.StudentConstance;
-import com.ignek.crud.dao.StudentDao;
+import com.ignek.crud.dao.StudentService;
 import com.ignek.crud.dto.Student;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -37,11 +37,11 @@ public class SaveServlet extends HttpServlet {
 		
 
 		if (sid != StudentConstance.DEFAULT_INTEGER) {
-			status = StudentDao.update(student);
-			JOptionPane.showMessageDialog(null, "Record Updated successfully");	
+			status = StudentService.update(student);
+			JOptionPane.showMessageDialog(null, StudentConstance.UPDATE_MESSAGE);	
 		} else {
-			status = StudentDao.save(student);
-			JOptionPane.showMessageDialog(null, "Record saved successfully");
+			status = StudentService.save(student);
+			JOptionPane.showMessageDialog(null, StudentConstance.SAVE_MESSAGE);
 		}
 		if (status > StudentConstance.DEFAULT_INTEGER) {
 			request.getRequestDispatcher("index.jsp").include(request, response);

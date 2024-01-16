@@ -45,5 +45,9 @@ public class StudentConstance {
 	public static final String STUDENT_LIST = "list";
 
 	public static final String STUDENT = "student";
+	
+	public static final String UPDATE_MESSAGE="Record Updated successfully";
+	
+	public static final String SAVE_MESSAGE="Record saved successfully";
 
 }

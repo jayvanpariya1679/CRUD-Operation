@@ -9,7 +9,7 @@ import com.ignek.crud.connection.DBConnection;
 import com.ignek.crud.constance.StudentConstance;
 import com.ignek.crud.dto.Student;
 
-public abstract class StudentDao {
+public abstract class StudentService {
 	private static void setPreparedStatement(Student student, PreparedStatement preparedStatement) {
 		try {
 			preparedStatement.setString(1, student.getFirstName());
@@ -82,7 +82,7 @@ public abstract class StudentDao {
 	}
 
 	public static Student getStudentById(int id) {
-		Student student = new Student(id, null, null, null, StudentConstance.DEFAULT_INTEGER, null, null);
+		Student student = new Student();
 		try {
 			Connection connection = DBConnection.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(StudentConstance.SELECT_QUERY_BY_ID);
@@ -99,13 +99,13 @@ public abstract class StudentDao {
 	}
 
 	public static List<Student> getAllStudents() {
-		List<Student> list = new ArrayList<Student>();
+		List<Student> list = new ArrayList<>();
 		try {
 			Connection connection = DBConnection.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(StudentConstance.SELECT_QUERY);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				Student student = new Student(StudentConstance.DEFAULT_INTEGER, null, null, null, StudentConstance.DEFAULT_INTEGER, null, null);
+				Student student = new Student();
 				setStudentData(student, resultSet);
 				list.add(student);
 			}

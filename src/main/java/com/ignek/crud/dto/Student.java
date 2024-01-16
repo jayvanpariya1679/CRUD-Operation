@@ -21,6 +21,10 @@ public class Student {
 		this.gender = gender;
 		this.course = course;
 	}
+	
+	public Student() {
+		super();
+	}
 
 	public int getId() {
 		return id;
