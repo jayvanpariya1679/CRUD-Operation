@@ -10,7 +10,7 @@ import com.ignek.crud.constance.StudentConstance;
 import com.ignek.crud.dto.Student;
 
 public abstract class StudentDao {
-	private static void prepareMethod(Student student, PreparedStatement preparedStatement) {
+	private static void setPreparedStatement(Student student, PreparedStatement preparedStatement) {
 		try {
 			preparedStatement.setString(1, student.getFirstName());
 			preparedStatement.setString(2, student.getLastName());
@@ -24,11 +24,11 @@ public abstract class StudentDao {
 	}
 
 	public static int save(Student student) {
-		int status = 0;
+		int status = StudentConstance.DEFAULT_INTEGER;
 		try {
 			Connection connection = DBConnection.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(StudentConstance.SAVE_QUERY);
-			prepareMethod(student, preparedStatement);
+			setPreparedStatement(student, preparedStatement);
 			status = preparedStatement.executeUpdate();
 			connection.close();
 		} catch (Exception e) {
@@ -38,11 +38,11 @@ public abstract class StudentDao {
 	}
 
 	public static int update(Student student) {
-		int status = 0;
+		int status = StudentConstance.DEFAULT_INTEGER;
 		try {
 			Connection connection = DBConnection.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(StudentConstance.UPDATE_QUERY);
-			prepareMethod(student, preparedStatement);
+			setPreparedStatement(student, preparedStatement);
 			preparedStatement.setInt(7, student.getId());
 			status = preparedStatement.executeUpdate();
 			connection.close();
@@ -53,7 +53,7 @@ public abstract class StudentDao {
 	}
 
 	public static int delete(int id) {
-		int status = 0;
+		int status = StudentConstance.DEFAULT_INTEGER;
 		try {
 			Connection connection = DBConnection.getConnection();
 			PreparedStatement preparedStatement = connection.prepareStatement(StudentConstance.DELETE_QUERY);
@@ -66,7 +66,7 @@ public abstract class StudentDao {
 		return status;
 	}
 
-	private static void studentData(Student student, ResultSet resultSet) {
+	private static void setStudentData(Student student, ResultSet resultSet) {
 		try {
 			student.setId(resultSet.getInt(1));
 			student.setFirstName(resultSet.getString(2));
@@ -89,7 +89,7 @@ public abstract class StudentDao {
 			preparedStatement.setInt(1, id);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
-				studentData(student, resultSet);
+				setStudentData(student, resultSet);
 			}
 			connection.close();
 		} catch (Exception e) {
@@ -105,8 +105,8 @@ public abstract class StudentDao {
 			PreparedStatement preparedStatement = connection.prepareStatement(StudentConstance.SELECT_QUERY);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				Student student = new Student(0, null, null, null, StudentConstance.DEFAULT_INTEGER, null, null);
-				studentData(student, resultSet);
+				Student student = new Student(StudentConstance.DEFAULT_INTEGER, null, null, null, StudentConstance.DEFAULT_INTEGER, null, null);
+				setStudentData(student, resultSet);
 				list.add(student);
 			}
 			connection.close();

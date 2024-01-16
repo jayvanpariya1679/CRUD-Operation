@@ -44,6 +44,6 @@ public class StudentConstance {
 
 	public static final String STUDENT_LIST = "list";
 
-	public static final String STUDENT_BY_ID = "student";
+	public static final String STUDENT = "student";
 
 }

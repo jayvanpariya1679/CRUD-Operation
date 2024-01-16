@@ -21,14 +21,15 @@ public class EditServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
-		String editId = request.getParameter("editId");
-		String deleteId = request.getParameter("deleteId");
+		String editId = request.getParameter(StudentConstance.EDIT_ID);
+		String deleteId = request.getParameter(StudentConstance.DELETE_ID);
 	
 		if(editId != null) {
-			Student Student_BY_ID = StudentDao.getStudentById(Integer.parseInt(editId));
-			request.setAttribute(StudentConstance.STUDENT_BY_ID,Student_BY_ID);
+			Student student = StudentDao.getStudentById(Integer.parseInt(editId));
+			request.setAttribute(StudentConstance.STUDENT,student);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
-		}
+		}	
+		
 		if(deleteId!=null){
 			StudentDao.delete(Integer.parseInt(deleteId));
 			response.sendRedirect("ViewServlet");

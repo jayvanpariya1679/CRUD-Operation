@@ -22,8 +22,8 @@ public class ViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
-		List<Student> Student_List = StudentDao.getAllStudents();
-		request.setAttribute(StudentConstance.STUDENT_LIST,Student_List);
+		List<Student> studentList = StudentDao.getAllStudents();
+		request.setAttribute(StudentConstance.STUDENT_LIST,studentList);
 		request.getRequestDispatcher("View.jsp").forward(request, response);
 	}
 }
