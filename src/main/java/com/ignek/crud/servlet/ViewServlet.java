@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import com.ignek.crud.constance.StudentConstance;
 import com.ignek.crud.dao.StudentDao;
 import com.ignek.crud.dto.Student;
 
@@ -21,8 +22,8 @@ public class ViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
-		List<Student> list = StudentDao.getAllStudents();
-		request.setAttribute("list", list);
+		List<Student> Student_List = StudentDao.getAllStudents();
+		request.setAttribute(StudentConstance.STUDENT_LIST,Student_List);
 		request.getRequestDispatcher("View.jsp").forward(request, response);
 	}
 }

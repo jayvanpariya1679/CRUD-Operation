@@ -31,8 +31,8 @@
 				<td>${student.phoneNumber}</td>
 				<td>${student.gender}</td>
 				<td>${student.course}</td>
-				<td><a href='EditServlet?eId=${student.id}' class="edit">Edit</a></td>
-				<td><a href='EditServlet?dId=${student.id}' class="delete">Delete</a></td>
+				<td><a href='EditServlet?editId=${student.id}' class="edit">Edit</a></td>
+				<td><a href='EditServlet?deleteId=${student.id}' class="delete">Delete</a></td>
 			</tr>
 		</c:forEach>
 	</table>

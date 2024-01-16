@@ -6,7 +6,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import com.ignek.crud.constance.StudentConstance;
 import com.ignek.crud.dao.StudentDao;
 import com.ignek.crud.dto.Student;
@@ -22,17 +21,16 @@ public class EditServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		String eId = request.getParameter("eId");
-		String dId = request.getParameter("dId");
+		String editId = request.getParameter("editId");
+		String deleteId = request.getParameter("deleteId");
 	
-		if(eId != null) {
-			Student student = StudentDao.getStudentById(Integer.parseInt(eId));
-			request.setAttribute("student", student);
+		if(editId != null) {
+			Student Student_BY_ID = StudentDao.getStudentById(Integer.parseInt(editId));
+			request.setAttribute(StudentConstance.STUDENT_BY_ID,Student_BY_ID);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
-		if(dId!=null){
-			StudentDao.delete(Integer.parseInt(dId));
+		if(deleteId!=null){
+			StudentDao.delete(Integer.parseInt(deleteId));
 			response.sendRedirect("ViewServlet");
 		}
 		

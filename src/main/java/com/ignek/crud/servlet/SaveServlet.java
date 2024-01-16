@@ -1,7 +1,7 @@
 package com.ignek.crud.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import javax.swing.JOptionPane;
 import com.ignek.crud.constance.StudentConstance;
 import com.ignek.crud.dao.StudentDao;
 import com.ignek.crud.dto.Student;
@@ -18,35 +18,33 @@ public class SaveServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
 		String id = request.getParameter(StudentConstance.ID);
-		int status = 0;
-		int sid = 0;
+		int status = StudentConstance.DEFAULT_INTEGER;
+		int sid = StudentConstance.DEFAULT_INTEGER;
 		if (!id.equals(null) && !id.equals(StudentConstance.BLANK)) {
 			sid = Integer.parseInt(id);
 		}
 
-		String firstName = request.getParameter(StudentConstance.FIRSTNAME);
-		String lastName = request.getParameter(StudentConstance.LASTNAME);
+		String firstName = request.getParameter(StudentConstance.FIRST_NAME);
+		String lastName = request.getParameter(StudentConstance.LAST_NAME);
 		String email = request.getParameter(StudentConstance.EMAIL);
-		String phoneNumber = request.getParameter(StudentConstance.PHONENUMBER);
+		String phoneNum = request.getParameter(StudentConstance.PHONE_NUMBER);
+		long phoneNumber = Long.parseLong(phoneNum);
 		String gender = request.getParameter(StudentConstance.GENDER);
 		String course = request.getParameter(StudentConstance.COURSE);
 
 		Student student = new Student(sid,firstName,lastName,email,phoneNumber,gender,course);
 		
 
-		if (sid != 0) {
+		if (sid != StudentConstance.DEFAULT_INTEGER) {
 			status = StudentDao.update(student);
-			out.print("<p>Record Updated successfully</p>");
+			JOptionPane.showMessageDialog(null, "Record Updated successfully");	
 		} else {
 			status = StudentDao.save(student);
-			out.print("<p>Record saved successfully</p>");
+			JOptionPane.showMessageDialog(null, "Record saved successfully");
 		}
-		if (status > 0) {
+		if (status > StudentConstance.DEFAULT_INTEGER) {
 			request.getRequestDispatcher("index.jsp").include(request, response);
 		}
-
-		out.close();
 	}
 }

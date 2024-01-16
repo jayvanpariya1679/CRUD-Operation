@@ -4,7 +4,7 @@ import com.ignek.crud.constance.StudentConstance;
 
 import java.sql.*;
 
-public class StudentConnection {
+public class DBConnection {
 
 	public static Connection getConnection() {
 		Connection connection = null;
